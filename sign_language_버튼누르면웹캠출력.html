@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+  
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      font-family: sans-serif;
+      margin: 0;
+    }
+
+    .container {
+      margin-top: 20px;
+      text-align: center;
+    }
+
+    .image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px; /* 이미지와 텍스트 간격 설정 */
+    margin-top: 10px; /* 상단 간격 조정 */
+    margin-bottom: 10px; /* 하단 간격 조정 */
+  }
+
+    
+
+    #webcam {
+      width: 400px;
+      height: 300px;
+      border: 1px solid black;
+      margin-top: 20px;
+    }
+
+    .textbox {
+      width: 400px;
+      height: 100px;
+      margin-top: 20px;
+    }
+
+    th,
+    td {
+      border: 1px solid #aaa;
+      padding: 0.6rem;
+      min-width: 10rem;
+      text-align: left;
+    }
+
+    th {
+      position: sticky;
+      top: 0;
+      background-color: #f8f8f8;
+    }
+
+    td {
+      position: sticky;
+      left: 0;
+      background-color: #f8f8f8;
+    }
+    .image-text {
+    position: relative;
+  }
+  .image-text span {
+    position: absolute;
+    top: 0;
+    
+    left: 0;
+    background-color: white;
+    padding: 5px;
+    font-weight: bold;
+    font-size: 12px;
+  }
+  </style>
+  <script src="sign_language_gpt.js"></script>
+</head>
+<body>
+  <div class="container">
+  <h1>수어 번역 프로그램 <br>
+    The Sign Language Translator Program</h1>
+
+    <div class="image">
+      <div class="image-text">
+        <span>띄어쓰기(space)</span>
+      <img src="img/space.jpg" width="200" height="200" alt="spaceImage">
+      <p>의미단위로 간격을 조정합니다.</p>
+    </div>
+
+    <div class="image-text">
+      <span>전체삭제(clear)</span>
+      <img src="img/clear.jpg" width="200" height="200" alt="clearImage">
+      <p>문자를 전체삭제합니다.</p>
+    </div>
+      <div class="image-text">
+        <span>직전문자삭제(backspace)</span>
+        <img src="img/backspace.jpg" width="200" height="200" alt="backspaceImage">
+        <p> 직전문자를 삭제합니다.</p>
+    </div>
+  </div>
+    <div class="video-container">
+      <video id="webcam" width="400" height="300" autoplay playsinline></video>
+    </div>
+    <button onclick="getVideo()">영상(Video)</button>
+    <div role="region" aria-label="data table" tabindex="0" class="primary">
+      <table id="sentenceTable">
+        <tbody>
+          <tr>
+            <th>입력 중인 문장</th>
+            <td>입력 중인 문장입니다.<button class="translator">번역(translator)</button></td>
+          </tr>
+          <tr>
+            <th>입력 문장</th>
+            <td>입력된 문장입니다.</td>
+          </tr>
+          <tr>
+            <th>번역 문장</th>
+            <td>번역된 문장입니다.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</body>
+</html>

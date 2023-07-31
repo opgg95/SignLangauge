@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Video</title>
+    <style>
+        body{
+            color:white;
+            margin:0px;
+            padding:0px;
+        }
+        header.feature-box.top{
+        background-color:black;
+        height:100px;
+        margin:0px;
+        padding:20px;
+        text-align:center;
+        }
+        header.feature-box.second{
+        background-color:blue;
+        height:50px;
+        text-align:center;
+        margin-top:-25px;
+        }
+        .features{
+          background-color:black;
+          width: 900px;
+          height: 700px;
+          border-radius: 35px;
+          object-fit: contain;
+          margin:20px;
+        }
+        section.col-sm{
+          background-color:black;
+          width: 1000px;
+          height: 650px;
+          border-radius: 35px;
+          object-fit: contain;
+          margin:40px;
+        }
+
+        img{
+          width: 900px;
+          height: 600px;
+          border-radius: 35px;
+          object-fit: contain;
+          margin:40px;
+        }
+
+        .new{
+        color:black;
+        margin:0px;
+        padding:10px;
+        background-color:green;
+        margin:0px;
+        margin-top:-10px;
+        }
+    </style>
+</head>
+<body>
+<header class="feature-box top">
+    <h1><strong>수어 번역 프로그램</strong></h1>
+</header>
+<header class="feature-box second">
+     <h1><strong>The Sign Language Translator Program</strong></h1>
+</header>
+
+  <section class="col-sm " >
+    <img src="{{ url_for('webapp') }}"   alt="Upload video">
+  </section>
+  <div>
+    <button id="playsound">Play Sound</button>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <script>
+    $(document).ready(function() {
+        function get_sentence() {
+            return $.ajax({
+                url: '/get_sentence',
+                method: 'GET',
+                async: false
+            }).responseText;
+        }
+
+        $('#playsound').click(function() {
+            var sentence = get_sentence();
+            console.log('Current sentence:', sentence);
+
+            $.ajax({
+                url: '/translate_and_play',
+                method: 'POST',
+                data: { sentence: sentence },
+                success: function(response) {
+                    console.log(response);
+                },
+                error: function(xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>
+</body>
+</html>
